@@ -1,6 +1,7 @@
 # Detecção de Transações Fraudulentas
 
-![image](https://github.com/danielesantiago/FraudClassifier/assets/64613885/689db006-101a-425c-ba08-a279ef89f064)
+![image](https://github.com/danielesantiago/FraudClassifier/assets/64613885/2f879988-ada6-48f0-bdfe-b5557308899e)
+
 
 
 ## 📌 Overview
