@@ -7,6 +7,9 @@
 ## 📌 Overview
 O projeto visa conduzir uma análise exploratória dos dados e construir modelos de machine learning para detectar transações fraudulentas com alta precisão. Utilizamos técnicas avançadas de análise de dados, machine learning e balanceamento de dados para identificar padrões e anomalias.
 
+📄 [Veja a minha apresentação aqui](https://github.com/danielesantiago/FraudClassifier/blob/master/Apresenta%C3%A7%C3%A3o%20%20Fraude.pdf)
+
+
 ## 💼 Business Understanding
 
 A fraude em transações representa uma ameaça crescente. À medida que o uso de cartão de crédito aumenta, as fraudes também acompanham esse crescimento. Entender essa ameaça e suas métricas é fundamental para combater efetivamente tais atividades. 
