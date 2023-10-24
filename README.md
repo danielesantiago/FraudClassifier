@@ -31,7 +31,9 @@ A fraude em transações representa uma ameaça crescente. À medida que o uso d
 A eficácia do nosso modelo de detecção de fraude é vital para a saúde financeira da empresa. A empresa ganha 10% do valor de um pagamento corretamente aprovado, mas sofre uma perda completa, ou seja, 100%, em caso de uma transação fraudulenta. Portanto, otimizar a Taxa de Fraude e a Taxa de Aprovação é fundamental.
 
 Os dados atuais apontam para algumas áreas de preocupação:
-![image](https://github.com/danielesantiago/FraudClassifier/assets/64613885/9c9675a2-ab80-47fb-bcc4-8d553a0bfa91)
+
+![image](https://github.com/danielesantiago/FraudClassifier/assets/64613885/4887e641-a6d6-4256-bdc7-3ea26a7849d2)
+
 
 Ao observar o gráfico, notamos um problema significativo: as classes estão notavelmente sobrepostas. Isso indica que nosso modelo tem dificuldades em distinguir entre transações legítimas e fraudulentas. Idealmente, gostaríamos de ver uma separação mais clara entre as duas classes, o que indicaria que o modelo pode identificar características distintas associadas a cada tipo de transação. A sobreposição sugere que muitas transações legítimas e fraudulentas têm características semelhantes, tornando a tarefa de classificação mais desafiadora.
 
@@ -86,14 +88,17 @@ Para o nosso projeto, utilizamos o MLFlow como ferramenta de rastreamento. As m�
 - Razão de lucro
   
 Dessa maneira, foi possível monitorar e otimizar o desempenho do nosso modelo de forma eficiente, garantindo resultados mais robustos e transparentes. A visualização das métricas e experimentos do projeto podem ser visualizadas no dashboard MLFlow:
-![image](https://github.com/danielesantiago/FraudClassifier/assets/64613885/77230341-75ac-4729-8e6a-358f70de9833)
+
+![image](https://github.com/danielesantiago/FraudClassifier/assets/64613885/d4424e41-4153-4331-90b1-27266dc8c965)
+
 
 
 ## 📈 Modelo Treinado
 
 Ao avaliar o desempenho do Modelo Atual em comparação com o Modelo Treinado, é evidente que o último apresenta melhorias significativas não apenas em métricas de desempenho, mas também no impacto financeiro.
 
-![image](https://github.com/danielesantiago/FraudClassifier/assets/64613885/c7fa8903-6a82-49ec-a07f-5edbbb78f166)
+![image](https://github.com/danielesantiago/FraudClassifier/assets/64613885/b5a946df-0d58-4756-965a-cbaccaae2c5a)
+
 
 **Análise Visual da Imagem**:
 Ao examinar o gráfico, vemos uma distinção mais clara entre as transações legítimas e as fraudulentas no Modelo Treinado. Essa separação melhor definida sugere que o modelo é mais capaz de identificar as características distintivas das transações, resultando em classificações mais precisas.
