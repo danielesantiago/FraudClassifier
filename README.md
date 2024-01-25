@@ -144,7 +144,6 @@ A estrutura de diretórios do projeto foi organizada da seguinte forma:
 ├── reports
 │ └── figures 
 ├── requirements.txt
-├── setup.py
 ├── src
 │ ├── init.py 
 │ ├── data
