@@ -152,7 +152,16 @@ A estrutura de diretórios do projeto foi organizada da seguinte forma:
 │ │ └── apply_kfold_target_encoding.py 
 │ ├── models
 │ │ ├── predict_model.py 
-│ │ └── train_model.py 
+│ │ └── train_model.py
+├── tests
+│ ├── init.py 
+│ ├── data
+│ │ └──test_make_dataset.py 
+│ ├── features
+│ │ └── test_apply_kfold_target_encoding.py 
+│ ├── models
+│ │ ├── test_predict_model.py 
+│ │ └── test_train_model.py 
 
 ```
 
