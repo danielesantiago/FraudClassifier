@@ -131,6 +131,44 @@ Para aprofundar nosso entendimento sobre o comportamento do modelo, conduzimos u
 
 Os avanços nas métricas de desempenho, combinados com uma análise financeira promissora, indicam que o Modelo Treinado é uma evolução notável em relação ao anterior. Ele se posiciona não apenas como uma ferramenta mais eficaz para identificar fraudes, mas também como um potencial catalisador para aumentar a rentabilidade.
 
+## 📜 Estrutura do Projeto
+
+A estrutura de diretórios do projeto foi organizada da seguinte forma:
+```
+├── README.md 
+├── data
+│ ├── processed
+│ └── raw
+├── models
+├── notebooks 
+├── reports
+│ └── figures 
+├── requirements.txt
+├── setup.py
+├── src
+│ ├── init.py 
+│ ├── data
+│ │ └── make_dataset.py 
+│ ├── features
+│ │ └── apply_kfold_target_encoding.py 
+│ ├── models
+│ │ ├── predict_model.py 
+│ │ └── train_model.py 
+
+```
+
+**Observação sobre os Dados:**
+
+Os dados utilizados neste notebook pertencem ao Preparatório para Entrevistas em Dados (PED). Por motivos de privacidade e restrições de compartilhamento, esses dados não estão incluídos diretamente no notebook.
+
+**Como Acessar os Dados:**
+
+Se você estiver interessado em realizar este estudo de caso e necessitar dos dados, eles estão disponíveis no seguinte link: [Preparatório para Entrevistas em Dados (PED)](https://www.renatabiaggi.com/ped).
+
+Neste link, você encontrará todas as informações necessárias para acessar e utilizar os dados para fins de análise e pesquisa.
+
+
+
 ## 🚧 Próximos Passos
 
 O próximo marco neste percurso é levar o Modelo Treinado ao campo de batalha real: seu deployment. Isso permitirá que o modelo seja utilizado no cotidiano operacional, traduzindo suas promessas teóricas em benefícios tangíveis e imediatos para a empresa.
