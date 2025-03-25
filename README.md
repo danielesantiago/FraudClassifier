@@ -1,4 +1,6 @@
 # Detecção de Transações Fraudulentas
+![CI](https://github.com/danielesantiago/FraudClassifier/actions/workflows/ci.yml/badge.svg)
+![Dockerized](https://img.shields.io/badge/docker-ready-blue?logo=docker)
 
 ![image](https://github.com/danielesantiago/FraudClassifier/assets/64613885/2f879988-ada6-48f0-bdfe-b5557308899e)
 
@@ -176,8 +178,44 @@ Se você estiver interessado em realizar este estudo de caso e necessitar dos da
 Neste link, você encontrará todas as informações necessárias para acessar e utilizar os dados para fins de análise e pesquisa.
 
 
+## 🐳 Deploy com Docker
 
-## 🚧 Próximos Passos
+Para facilitar o deploy local da API de predição de fraudes, o projeto conta com um ambiente containerizado via Docker. Isso permite rodar a aplicação em qualquer máquina com Docker instalado, sem necessidade de configurar ambientes manualmente.
 
-O próximo marco neste percurso é levar o Modelo Treinado ao campo de batalha real: seu deployment. Isso permitirá que o modelo seja utilizado no cotidiano operacional, traduzindo suas promessas teóricas em benefícios tangíveis e imediatos para a empresa.
+### 🔧 Build da imagem:
+
+```bash
+docker build -t fraud-api .
+```
+
+### 🚀 Rodar a API:
+
+```bash
+docker run -p 8000:8000 fraud-api
+```
+
+Acesse a documentação da API em:
+
+```
+http://localhost:8000/docs
+```
+
+A API está construída com FastAPI, e carrega o pipeline de machine learning já treinado (`model_pipeline.pkl`), pronto para inferência.
+
+---
+
+## ⚙️ Integração Contínua com GitHub Actions
+
+Este projeto utiliza **CI (Integração Contínua)** via GitHub Actions para garantir a qualidade do código e facilitar a colaboração.
+
+A pipeline é acionada a cada push ou pull request na branch `master` e executa as seguintes etapas:
+
+1. ✅ Checkout do código
+2. 🐍 Instalação do Python 3.12
+3. 📦 Instalação de dependências com Poetry
+4. 🎨 Verificação de formatação com **Black**
+5. 🧹 Análise estática com **Pylint** (mínimo 8.0)
+6. ✅ Execução de **Pytest** para os testes automatizados
+
+
 
