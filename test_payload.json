@@ -1,0 +1,41 @@
+{
+    "data": [
+      {
+        "score_1": 4,
+        "score_2": 0.7685,
+        "score_3": 94436.24,
+        "score_4": 20,
+        "score_5": 0.4448275862,
+        "score_6": 1,
+        "pais": "BR",
+        "score_7": 5,
+        "categoria_produto": "cat_8d714cd",
+        "score_8": 0.8835978984,
+        "score_9": 240,
+        "score_10": 102,
+        "entrega_doc_1": 1,
+        "entrega_doc_2": null,
+        "entrega_doc_3": "N",
+        "valor_compra": 5.64
+      },
+      {
+        "score_1": 4,
+        "score_2": 0.755,
+        "score_3": 9258.5,
+        "score_4": 1,
+        "score_5": 0,
+        "score_6": 33,
+        "pais": "BR",
+        "score_7": 0,
+        "categoria_produto": "cat_64b574b",
+        "score_8": 0.3760190597,
+        "score_9": 4008,
+        "score_10": 0,
+        "entrega_doc_1": 1,
+        "entrega_doc_2": "Y",
+        "entrega_doc_3": "N",
+        "valor_compra": 1000000000
+      }
+    ]
+  }
+  
