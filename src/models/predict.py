@@ -7,7 +7,8 @@ from sklearn.metrics import (
     recall_score,
     roc_auc_score,
 )
-from config import MODEL_PATH, TEST_DATA_PATH, PREDICTIONS_PATH, PREDICTIONS_FILE
+from config import (MODEL_PATH, TEST_DATA_PATH, PREDICTIONS_PATH, PREDICTIONS_FILE, 
+TRAIN_DATA_PATH, PREDICTIONS_FILE_TRAIN, PREDICTIONS_PATH_TRAIN)
 from features import preprocess_categoria_produto
 
 
@@ -72,6 +73,38 @@ def make_predictions(data_path=TEST_DATA_PATH, threshold=0.61):
     # Calcula métricas se y_true existir
     if y_true is not None:
         calculate_metrics(y_true=y_true, y_pred=y_pred, y_proba=y_proba)
+
+
+def make_predictions_train(data_path=TRAIN_DATA_PATH, threshold=0.61):
+
+    pipeline = load_model()
+
+    data = pd.read_csv(data_path)
+
+    data_preprocessed = preprocess_categoria_produto(data)
+
+    X_test = data_preprocessed.drop(columns=["fraude"], errors="ignore")
+    y_true = data_preprocessed.get("fraude", None)
+
+    y_proba = pipeline.predict_proba(X_test)[:, 1]
+    print("Probabilidades previstas calculadas com sucesso.")
+
+    y_pred = (y_proba > threshold).astype(int)
+    print(f"Predições feitas com sucesso. Threshold: {threshold}")
+
+    # Salva as predições no dataframe
+    data["predicted_fraude"] = y_pred
+    data["predicted_proba"] = y_proba  # Salva as probabilidades
+    if y_true is not None:
+        data["true_fraude"] = y_true
+
+    # Salva os resultados em arquivo
+    data.to_csv(PREDICTIONS_PATH_TRAIN, index=False)
+    print(f"Resultados salvos em: {PREDICTIONS_PATH_TRAIN}")
+
+    # Calcula métricas se y_true existir
+    if y_true is not None:
+        calculate_metrics(y_true=y_true, y_pred=y_pred, y_proba=y_proba, output_path=PREDICTIONS_FILE_TRAIN)
 
 
 if __name__ == "__main__":
