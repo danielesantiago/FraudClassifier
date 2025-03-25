@@ -30,7 +30,7 @@ def test_kfold_target_encoder():
     )
 
     encoder = KFoldTargetEncoder(
-        colnames="categoria_produto", target_name="fraude", n_fold=2
+        colnames="categoria_produto", n_fold=2
     )
     result = encoder.transform(data)
 
