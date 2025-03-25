@@ -21,7 +21,7 @@ def test_column_dropper():
 
 
 def test_kfold_target_encoder():
-
+    
     data = pd.DataFrame(
         {
             "categoria_produto": ["A", "B", "A", "B", "C"],  # Variável categórica
@@ -30,10 +30,20 @@ def test_kfold_target_encoder():
     )
 
     encoder = KFoldTargetEncoder(colnames="categoria_produto", n_fold=2)
-    result = encoder.transform(data)
+
+    encoder.fit(data[["categoria_produto"]], data["fraude"])
+
+
+    result = encoder.transform(data[["categoria_produto"]])
+
 
     assert f"categoria_produto_Kfold_Target_Enc" in result.columns
     assert result["categoria_produto_Kfold_Target_Enc"].isnull().sum() == 0
+
+    # Verificando se o valor de encoding está correto
+    # (Este valor vai depender da média das categorias no dataset)
+    assert result["categoria_produto_Kfold_Target_Enc"].iloc[0] == result["categoria_produto_Kfold_Target_Enc"].iloc[1]
+
 
 
 def test_preprocess_categoria_produto():
