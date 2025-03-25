@@ -35,7 +35,7 @@ def get_pipeline():
 
     pipeline = Pipeline(
         [
-            ("kfold_encoder", KFoldTargetEncoder()), 
+            ("kfold_encoder", KFoldTargetEncoder()),
             ("drop_columns", ColumnDropper()),
             ("preprocessor", DataProcessor()),
             ("imputer", ScoreImputer()),

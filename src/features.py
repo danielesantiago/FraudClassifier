@@ -32,14 +32,22 @@ class KFoldTargetEncoder(BaseEstimator, TransformerMixin):
             X_temp.loc[X_val.index, col_mean_name] = X_val[self.colnames].map(encoding)
 
         X_temp[col_mean_name].fillna(self.global_mean_, inplace=True)
-        self.encoding_map_ = X_temp[[self.colnames, col_mean_name]].dropna().drop_duplicates().set_index(self.colnames).to_dict()[col_mean_name]
+        self.encoding_map_ = (
+            X_temp[[self.colnames, col_mean_name]]
+            .dropna()
+            .drop_duplicates()
+            .set_index(self.colnames)
+            .to_dict()[col_mean_name]
+        )
 
         return self
 
     def transform(self, X):
         X_copy = X.copy()
         col_mean_name = f"{self.colnames}_Kfold_Target_Enc"
-        X_copy[col_mean_name] = X_copy[self.colnames].map(self.encoding_map_).fillna(self.global_mean_)
+        X_copy[col_mean_name] = (
+            X_copy[self.colnames].map(self.encoding_map_).fillna(self.global_mean_)
+        )
         return X_copy
 
 
@@ -59,7 +67,7 @@ class ColumnDropper(BaseEstimator, TransformerMixin):
                 "score_fraude_modelo",
                 "categoria_produto",
             ],
-            errors="ignore"  # Ignora a ausência de colunas
+            errors="ignore",  # Ignora a ausência de colunas
         )
 
 
@@ -73,28 +81,29 @@ class DataProcessor(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         X_copy = X.copy()
-        
+
         # Verifica e transforma a coluna 'entrega_doc_2'
         if "entrega_doc_2" in X_copy.columns:
             X_copy["is_missing"] = X_copy["entrega_doc_2"].isnull().astype(int)
             X_copy["entrega_doc_2"] = (
-                X_copy["entrega_doc_2"].fillna("N").apply(lambda x: 1 if x == "Y" else 0)
+                X_copy["entrega_doc_2"]
+                .fillna("N")
+                .apply(lambda x: 1 if x == "Y" else 0)
             )
-        
+
         # Verifica e transforma a coluna 'pais'
         if "pais" in X_copy.columns:
             X_copy["pais"] = X_copy["pais"].apply(
                 lambda x: x if x in ["BR", "AR"] else "Outros"
             )
-        
+
         # Verifica e transforma a coluna 'entrega_doc_3'
         if "entrega_doc_3" in X_copy.columns:
             X_copy["entrega_doc_3"] = X_copy["entrega_doc_3"].apply(
                 lambda x: 1 if x == "Y" else 0
             )
-        
-        return X_copy
 
+        return X_copy
 
 
 class ScoreImputer(BaseEstimator, TransformerMixin):
