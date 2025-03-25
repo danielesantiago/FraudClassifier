@@ -9,6 +9,7 @@ from features import (
     ScoreImputer,
     OneHotFeatureEncoder,
     preprocess_categoria_produto,
+    KFoldTargetEncoder,
 )
 
 
@@ -34,6 +35,7 @@ def get_pipeline():
 
     pipeline = Pipeline(
         [
+            ("kfold_encoder", KFoldTargetEncoder()), 
             ("drop_columns", ColumnDropper()),
             ("preprocessor", DataProcessor()),
             ("imputer", ScoreImputer()),

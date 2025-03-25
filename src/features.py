@@ -11,28 +11,36 @@ class KFoldTargetEncoder(BaseEstimator, TransformerMixin):
     Aplica K-Fold Target Encoding para variáveis categóricas.
     """
 
-    def __init__(self, colnames="categoria_produto", target_name="fraude", n_fold=5):
+    def __init__(self, colnames="categoria_produto", n_fold=5):
         self.colnames = colnames
-        self.target_name = target_name
         self.n_fold = n_fold
 
     def fit(self, X, y=None):
+        self.global_mean_ = y.mean()
+        self.encoding_map_ = {}
+
+        kf = KFold(n_splits=self.n_fold, shuffle=True, random_state=42)
+        X_temp = X.copy()
+        X_temp["__target__"] = y
+
+        col_mean_name = f"{self.colnames}_Kfold_Target_Enc"
+        X_temp[col_mean_name] = np.nan
+
+        for tr_idx, val_idx in kf.split(X_temp):
+            X_tr, X_val = X_temp.iloc[tr_idx], X_temp.iloc[val_idx]
+            encoding = X_tr.groupby(self.colnames)["__target__"].mean()
+            X_temp.loc[X_val.index, col_mean_name] = X_val[self.colnames].map(encoding)
+
+        X_temp[col_mean_name].fillna(self.global_mean_, inplace=True)
+        self.encoding_map_ = X_temp[[self.colnames, col_mean_name]].dropna().drop_duplicates().set_index(self.colnames).to_dict()[col_mean_name]
+
         return self
 
     def transform(self, X):
-        mean_target = X[self.target_name].mean()
-        kf = KFold(n_splits=self.n_fold, shuffle=True, random_state=42)
-
+        X_copy = X.copy()
         col_mean_name = f"{self.colnames}_Kfold_Target_Enc"
-        X[col_mean_name] = np.nan
-
-        for tr_idx, val_idx in kf.split(X):
-            X_tr, X_val = X.iloc[tr_idx], X.iloc[val_idx]
-            X.loc[X.index[val_idx], col_mean_name] = X_val[self.colnames].map(
-                X_tr.groupby(self.colnames)[self.target_name].mean()
-            )
-        X[col_mean_name].fillna(mean_target, inplace=True)
-        return X
+        X_copy[col_mean_name] = X_copy[self.colnames].map(self.encoding_map_).fillna(self.global_mean_)
+        return X_copy
 
 
 class ColumnDropper(BaseEstimator, TransformerMixin):
