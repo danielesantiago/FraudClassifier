@@ -1,0 +1,46 @@
+name: CI Workflow for Fraud Classifier
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  ci-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies with Poetry
+      working-directory: src 
+      run: |
+        pip install poetry
+        poetry install
+
+    - name: Run black (code formatting)
+      working-directory: src
+      run: poetry run black . --check
+
+    - name: Run pylint (code quality check)
+      env:  # Configura o PYTHONPATH para Pylint
+        PYTHONPATH: ${{ github.workspace }}/src
+      working-directory: src
+      run: poetry run pylint models --fail-under=8
+
+    - name: Run pytest (unit tests)
+      env:  # Configura o PYTHONPATH para Pylint
+        PYTHONPATH: ${{ github.workspace }}/src
+      working-directory: src
+      run: poetry run pytest tests
+

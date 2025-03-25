@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "src"
+version = "0.1.0"
+description = ""
+authors = ["Daniele"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+scikit-learn = "^1.6.0"
+black = "^24.10.0"
+pylint = "^3.3.3"
+pytest = "^8.3.4"
+numpy = "^2.2.1"
+pandas = "^2.2.3"
+openpyxl = "^3.1.5"
+lightgbm = "^4.5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
