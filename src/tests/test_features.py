@@ -29,9 +29,7 @@ def test_kfold_target_encoder():
         }
     )
 
-    encoder = KFoldTargetEncoder(
-        colnames="categoria_produto", n_fold=2
-    )
+    encoder = KFoldTargetEncoder(colnames="categoria_produto", n_fold=2)
     result = encoder.transform(data)
 
     assert f"categoria_produto_Kfold_Target_Enc" in result.columns
