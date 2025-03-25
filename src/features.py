@@ -51,7 +51,7 @@ class ColumnDropper(BaseEstimator, TransformerMixin):
                 "score_fraude_modelo",
                 "categoria_produto",
             ],
-            axis=1,
+            errors="ignore"  # Ignora a ausência de colunas
         )
 
 
@@ -65,17 +65,28 @@ class DataProcessor(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         X_copy = X.copy()
-        X_copy["is_missing"] = X_copy["entrega_doc_2"].isnull().astype(int)
-        X_copy["entrega_doc_2"] = (
-            X_copy["entrega_doc_2"].fillna("N").apply(lambda x: 1 if x == "Y" else 0)
-        )
-        X_copy["pais"] = X_copy["pais"].apply(
-            lambda x: x if x in ["BR", "AR"] else "Outros"
-        )
-        X_copy["entrega_doc_3"] = X_copy["entrega_doc_3"].apply(
-            lambda x: 1 if x == "Y" else 0
-        )
+        
+        # Verifica e transforma a coluna 'entrega_doc_2'
+        if "entrega_doc_2" in X_copy.columns:
+            X_copy["is_missing"] = X_copy["entrega_doc_2"].isnull().astype(int)
+            X_copy["entrega_doc_2"] = (
+                X_copy["entrega_doc_2"].fillna("N").apply(lambda x: 1 if x == "Y" else 0)
+            )
+        
+        # Verifica e transforma a coluna 'pais'
+        if "pais" in X_copy.columns:
+            X_copy["pais"] = X_copy["pais"].apply(
+                lambda x: x if x in ["BR", "AR"] else "Outros"
+            )
+        
+        # Verifica e transforma a coluna 'entrega_doc_3'
+        if "entrega_doc_3" in X_copy.columns:
+            X_copy["entrega_doc_3"] = X_copy["entrega_doc_3"].apply(
+                lambda x: 1 if x == "Y" else 0
+            )
+        
         return X_copy
+
 
 
 class ScoreImputer(BaseEstimator, TransformerMixin):
