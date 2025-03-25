@@ -26,7 +26,7 @@ jobs:
       working-directory: src 
       run: |
         pip install poetry
-        poetry install
+        poetry install --no-root
 
     - name: Run black (code formatting)
       working-directory: src
