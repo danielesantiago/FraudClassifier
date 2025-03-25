@@ -129,9 +129,6 @@ Ao examinar o gráfico, vemos uma distinção mais clara entre as transações l
 Para aprofundar nosso entendimento sobre o comportamento do modelo, conduzimos uma análise exploratória detalhada, complementada pela análise SHAP. Essa análise SHAP nos permitiu destrinchar a relevância de cada variável e entender seu impacto nas previsões. Adicionalmente, realizamos testes de hipóteses para validar e solidificar nossas descobertas, garantindo que as observações são estatisticamente significativas. O detalhamento dessas análises pode ser acessado em nosso repositório: 
 [Case Fraude no GitHub](https://github.com/danielesantiago/FraudClassifier/blob/master/Case%20Fraude.ipynb).
 
-## 🚀 Reflexões Finais
-
-Os avanços nas métricas de desempenho, combinados com uma análise financeira promissora, indicam que o Modelo Treinado é uma evolução notável em relação ao anterior. Ele se posiciona não apenas como uma ferramenta mais eficaz para identificar fraudes, mas também como um potencial catalisador para aumentar a rentabilidade.
 
 ## 📜 Estrutura do Projeto
 
@@ -167,15 +164,18 @@ A estrutura de diretórios do projeto foi organizada da seguinte forma:
 
 ```
 
-**Observação sobre os Dados:**
+## ⚙️ Integração Contínua com GitHub Actions
 
-Os dados utilizados neste notebook pertencem ao Preparatório para Entrevistas em Dados (PED). Por motivos de privacidade e restrições de compartilhamento, esses dados não estão incluídos diretamente no notebook.
+Este projeto utiliza **CI (Integração Contínua)** via GitHub Actions para garantir a qualidade do código e facilitar a colaboração.
 
-**Como Acessar os Dados:**
+A pipeline é acionada a cada push ou pull request na branch `master` e executa as seguintes etapas:
 
-Se você estiver interessado em realizar este estudo de caso e necessitar dos dados, eles estão disponíveis no seguinte link: [Preparatório para Entrevistas em Dados (PED)](https://www.renatabiaggi.com/ped).
-
-Neste link, você encontrará todas as informações necessárias para acessar e utilizar os dados para fins de análise e pesquisa.
+1. ✅ Checkout do código
+2. 🐍 Instalação do Python 3.12
+3. 📦 Instalação de dependências com Poetry
+4. 🎨 Verificação de formatação com **Black**
+5. 🧹 Análise estática com **Pylint** (mínimo 8.0)
+6. ✅ Execução de **Pytest** para os testes automatizados
 
 
 ## 🐳 Deploy com Docker
@@ -202,20 +202,57 @@ http://localhost:8000/docs
 
 A API está construída com FastAPI, e carrega o pipeline de machine learning já treinado (`model_pipeline.pkl`), pronto para inferência.
 
----
 
-## ⚙️ Integração Contínua com GitHub Actions
+### 📚 Como testar a API
 
-Este projeto utiliza **CI (Integração Contínua)** via GitHub Actions para garantir a qualidade do código e facilitar a colaboração.
+Acesse a documentação interativa da API em:
 
-A pipeline é acionada a cada push ou pull request na branch `master` e executa as seguintes etapas:
+```
+http://localhost:8000/docs
+```
 
-1. ✅ Checkout do código
-2. 🐍 Instalação do Python 3.12
-3. 📦 Instalação de dependências com Poetry
-4. 🎨 Verificação de formatação com **Black**
-5. 🧹 Análise estática com **Pylint** (mínimo 8.0)
-6. ✅ Execução de **Pytest** para os testes automatizados
+Na documentação, você poderá visualizar os endpoints disponíveis e testar as predições diretamente pela interface do Swagger UI.
 
+### 🚀 Testando a predição via **`curl`**:
 
+Para testar a predição da API de forma prática, utilize o comando `curl` para enviar um payload com dados de exemplo para o endpoint `/predict`.
 
+1. **Use o arquivo `test_payload.json`** com os dados de exemplo para envio.
+2. **Execute o seguinte comando**:
+
+```bash
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d @test_payload.json
+```
+
+Este comando envia uma solicitação POST para o endpoint `/predict`, com o conteúdo do arquivo `test_payload.json` contendo as informações de entrada para a predição.
+
+### 📈 O que esperar da resposta:
+
+A resposta retornada pela API conterá as predições feitas pelo modelo de machine learning, com a **probabilidade de fraude** associada a cada transação. O formato da resposta será algo como:
+
+```json
+{
+  "results": [
+    {
+      "prediction": 0,
+      "probability": 0.25
+    },
+    {
+      "prediction": 1,
+      "probability": 0.85
+    }
+  ]
+}
+```
+
+**Observação sobre os Dados:**
+
+Os dados utilizados neste notebook pertencem ao Preparatório para Entrevistas em Dados (PED). Por motivos de privacidade e restrições de compartilhamento, esses dados não estão incluídos diretamente no notebook.
+
+**Como Acessar os Dados:**
+
+Se você estiver interessado em realizar este estudo de caso e necessitar dos dados, eles estão disponíveis no seguinte link: [Preparatório para Entrevistas em Dados (PED)](https://www.renatabiaggi.com/ped).
+
+Neste link, você encontrará todas as informações necessárias para acessar e utilizar os dados para fins de análise e pesquisa.
