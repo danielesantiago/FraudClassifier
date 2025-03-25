@@ -7,8 +7,15 @@ from sklearn.metrics import (
     recall_score,
     roc_auc_score,
 )
-from config import (MODEL_PATH, TEST_DATA_PATH, PREDICTIONS_PATH, PREDICTIONS_FILE, 
-TRAIN_DATA_PATH, PREDICTIONS_FILE_TRAIN, PREDICTIONS_PATH_TRAIN)
+from config import (
+    MODEL_PATH,
+    TEST_DATA_PATH,
+    PREDICTIONS_PATH,
+    PREDICTIONS_FILE,
+    TRAIN_DATA_PATH,
+    PREDICTIONS_FILE_TRAIN,
+    PREDICTIONS_PATH_TRAIN,
+)
 from features import preprocess_categoria_produto
 
 
@@ -104,7 +111,12 @@ def make_predictions_train(data_path=TRAIN_DATA_PATH, threshold=0.61):
 
     # Calcula métricas se y_true existir
     if y_true is not None:
-        calculate_metrics(y_true=y_true, y_pred=y_pred, y_proba=y_proba, output_path=PREDICTIONS_FILE_TRAIN)
+        calculate_metrics(
+            y_true=y_true,
+            y_pred=y_pred,
+            y_proba=y_proba,
+            output_path=PREDICTIONS_FILE_TRAIN,
+        )
 
 
 if __name__ == "__main__":
