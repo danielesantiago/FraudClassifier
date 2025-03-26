@@ -9,7 +9,7 @@
 ## 📌 Overview
 O projeto visa conduzir uma análise exploratória dos dados e construir modelos de machine learning para detectar transações fraudulentas com alta precisão. Utilizamos técnicas avançadas de análise de dados, machine learning e balanceamento de dados para identificar padrões e anomalias.
 
-📄 [Veja a minha apresentação aqui](https://github.com/danielesantiago/FraudClassifier/blob/master/Apresenta%C3%A7%C3%A3o%20Fraude.pdf)
+📄 [Veja a minha apresentação aqui](https://github.com/danielesantiago/FraudClassifier/blob/master/reports/Apresenta%C3%A7%C3%A3o%20Fraude.pdf)
 
 
 ## 💼 Business Understanding
@@ -69,12 +69,12 @@ _Etapas do Pré-processamento no Pipeline_:
 1. Exclusão de Colunas:
 * score_fraude_modelo: Modelo baseline que não deve ser utilizado.
 * data_compra: Para prevenir a degradação do modelo com o tempo.
-* produto: Devido à alta cardinalidade (mais de 8 mil categorias).
+* produto: Devido a alta cardinalidade (mais de 8 mil categorias).
 
 2. Tratamento de Categorias:
 * Manter as 1000 categorias em categoria_produto que correspondem a 80% das fraudes.
 * Limitar país para "BR", "AR" (que compõem mais de 90% da distribuição) e "outros".
-* Target encoding em categoria_produto devido à alta cardinalidade.
+* Target encoding em categoria_produto devido a alta cardinalidade.
 * One hot encoding nas demais variáveis categóricas.
 
 3. Tratamento de Valores Nulos:
@@ -127,7 +127,7 @@ Ao examinar o gráfico, vemos uma distinção mais clara entre as transações l
 ## 📊 Análise Exploratória, SHAP e Testes de Hipóteses
 
 Para aprofundar nosso entendimento sobre o comportamento do modelo, conduzimos uma análise exploratória detalhada, complementada pela análise SHAP. Essa análise SHAP nos permitiu destrinchar a relevância de cada variável e entender seu impacto nas previsões. Adicionalmente, realizamos testes de hipóteses para validar e solidificar nossas descobertas, garantindo que as observações são estatisticamente significativas. O detalhamento dessas análises pode ser acessado em nosso repositório: 
-[Case Fraude no GitHub](https://github.com/danielesantiago/FraudClassifier/blob/master/Case%20Fraude.ipynb).
+[Case Fraude no GitHub](https://github.com/danielesantiago/FraudClassifier/blob/master/notebooks/Case%20Fraude.ipynb).
 
 
 ## 📜 Estrutura do Projeto
@@ -139,28 +139,22 @@ A estrutura de diretórios do projeto foi organizada da seguinte forma:
 │ ├── processed
 │ └── raw
 ├── models
+│ └── model_pipeline.pkl
 ├── notebooks 
 ├── reports
 │ └── figures 
 ├── requirements.txt
 ├── src
 │ ├── init.py 
-│ ├── data
-│ │ └── make_dataset.py 
-│ ├── features
-│ │ └── apply_kfold_target_encoding.py 
+│ ├── features.py
+│ ├── config.py
 │ ├── models
 │ │ ├── predict_model.py 
 │ │ └── train_model.py
 ├── tests
-│ ├── init.py 
-│ ├── data
-│ │ └──test_make_dataset.py 
-│ ├── features
-│ │ └── test_apply_kfold_target_encoding.py 
-│ ├── models
-│ │ ├── test_predict_model.py 
-│ │ └── test_train_model.py 
+│ ├── init.py
+│ ├── test_features.py
+│ ├── test_predict.py 
 
 ```
 
@@ -173,8 +167,8 @@ A pipeline é acionada a cada push ou pull request na branch `master` e executa 
 1. ✅ Checkout do código
 2. 🐍 Instalação do Python 3.12
 3. 📦 Instalação de dependências com Poetry
-4. 🎨 Verificação de formatação com **Black**
-5. 🧹 Análise estática com **Pylint** (mínimo 8.0)
+4. 🎨 Verificação de formatação com **Black** na pasta src
+5. 🧹 Análise estática com **Pylint** (mínimo 8.0) para o código do modelo
 6. ✅ Execução de **Pytest** para os testes automatizados
 
 
