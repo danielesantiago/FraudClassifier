@@ -174,27 +174,35 @@ A pipeline é acionada a cada push ou pull request na branch `master` e executa 
 
 ## 🐳 Deploy com Docker
 
-Para facilitar o deploy local da API de predição de fraudes, o projeto conta com um ambiente containerizado via Docker. Isso permite rodar a aplicação em qualquer máquina com Docker instalado, sem necessidade de configurar ambientes manualmente.
+Para facilitar o deploy local da API de predição de fraudes, este projeto conta com um ambiente containerizado via Docker. Com isso, é possível executar a aplicação em qualquer máquina com Docker instalado, sem necessidade de configurar o ambiente manualmente.
 
-### 🔧 Build da imagem:
+### 🔧 Construir a imagem
 
 ```bash
 docker build -t fraud-api .
 ```
 
-### 🚀 Rodar a API:
+### 🚀 Rodar a API
 
 ```bash
 docker run -p 8000:8000 fraud-api
 ```
 
-Acesse a documentação da API em:
+Após iniciar o container, acesse a documentação interativa da API:
 
 ```
 http://localhost:8000/docs
 ```
 
-A API está construída com FastAPI, e carrega o pipeline de machine learning já treinado (`model_pipeline.pkl`), pronto para inferência.
+Você também pode utilizar o `Makefile` para facilitar a execução dos comandos:
+
+```bash
+make build      # Build da imagem Docker
+make run        # Executa a API
+make test-payload  # Envia payload de teste
+```
+
+A API foi desenvolvida com FastAPI e carrega um pipeline de machine learning previamente treinado (`model_pipeline.pkl`), pronto para realizar inferências em tempo real.
 
 
 ### 📚 Como testar a API
@@ -240,6 +248,45 @@ A resposta retornada pela API conterá as predições feitas pelo modelo de mach
   ]
 }
 ```
+
+### 🎬 Demonstração
+
+Veja abaixo um exemplo da API em funcionamento:
+
+![Demonstração da API](https://s7.ezgif.com/tmp/ezgif-71802532da602d.gif)
+
+
+
+## 📊 Dashboard de Monitoramento de Fraudes
+
+Este projeto conta com um dashboard interativo desenvolvido com **Streamlit**, que permite **analisar, visualizar e monitorar o desempenho de um modelo de detecção de fraudes** ao longo do tempo.
+
+O dashboard está dividido em duas seções principais:
+
+### 📊 Gráficos
+- Visualização dos **scores de fraude** previstos pelo modelo
+- Cálculo de **métricas de classificação** (Accuracy, Precision, Recall, F1-score)
+- Matrizes de confusão (absoluta e proporcional)
+- Métricas operacionais como **taxa de aprovação** e **fraude aprovada**
+- Estimativas financeiras de lucro, perda e receita com base nas decisões do modelo
+
+### 📡 Monitoramento
+- Comparações entre os dados de treino e de produção
+- Acompanhamento de **métricas de performance estimadas ao longo do tempo** com o uso do NannyML
+- Monitoramento da **qualidade dos dados**, incluindo:
+  - Quantidade de valores nulos
+  - Valores categóricos não observados anteriormente
+  - Alterações nas distribuições estatísticas
+
+> 📈 **Com essas informações, é possível monitorar métricas de negócio e detectar sinais de _drift_ (mudanças nos dados). Isso permite tomar decisões mais assertivas, como o momento ideal para re-treinar o modelo e garantir sua performance ao longo do tempo.**
+
+### 🎬 Demonstração
+
+Veja abaixo o dashboard em funcionamento:
+
+![Demonstração do Dashboard](https://s7.ezgif.com/tmp/ezgif-77ad65d822ebb9.gif)
+
+
 
 **Observação sobre os Dados:**
 
