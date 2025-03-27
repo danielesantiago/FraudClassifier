@@ -253,7 +253,7 @@ A resposta retornada pela API conterá as predições feitas pelo modelo de mach
 
 Veja abaixo um exemplo da API em funcionamento:
 
-![Demonstração da API](https://s7.ezgif.com/tmp/ezgif-71802532da602d.gif)
+![Demonstração da API](https://raw.githubusercontent.com/danielesantiago/FraudClassifier/refs/heads/master/reports/figures/ezgif-200991689f5bff.gif)
 
 
 
@@ -284,7 +284,7 @@ O dashboard está dividido em duas seções principais:
 
 Veja abaixo o dashboard em funcionamento:
 
-![Demonstração do Dashboard](https://s7.ezgif.com/tmp/ezgif-77ad65d822ebb9.gif)
+![Demonstração do Dashboard](https://raw.githubusercontent.com/danielesantiago/FraudClassifier/refs/heads/master/reports/figures/ezgif-2bec018b49a54b.gif)
 
 
 
